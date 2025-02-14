@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FCC6FF;
+            color: black;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full height on all devices */
+        }
+        .content {
+            max-width: 90%; /* Match the width of the GIF */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        img {
+            max-width: 100%; /* Ensure the GIF takes full width of its container */
+            height: auto;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .button {
+            background-color: #DD88CF;
+            color: black;
+            padding: 0.8rem 1.5rem; /* Normal button size */
+            font-size: 1rem; /* Normal text size */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Smooth hover effect */
+            text-decoration: none; /* Remove underline */
+        }
+        .button:hover {
+            background-color: #cc77bb; /* Darker purple on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem; /* Smaller heading for tablets */
+            }
+            .button {
+                padding: 0.6rem 1.2rem; /* Smaller button for tablets */
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem; /* Smaller heading for mobile */
+            }
+            .button {
+                padding: 0.5rem 1rem; /* Smaller button for mobile */
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img src="https://media1.tenor.com/m/kzrfq0zYb3wAAAAC/milk-and-mocha-milk.gif" alt="Milk and Mocha GIF">
+        <h1>And Also for Not Hitting Me When you Get Mad for No Reason 😜🙏💜</h1>
+        <br>
+        <a href="page6.html" class="button">Next</a>
+    </div>
+</body>
+</html>

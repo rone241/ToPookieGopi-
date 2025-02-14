@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Pookie Gopi</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FCC6FF;
+            color: black;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full height on all devices */
+            overflow: hidden; /* Prevent scrolling during animation */
+        }
+        .content {
+            max-width: 90%; /* Match the width of the GIF */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            max-width: 80%; /* Ensure paragraph doesn't overflow */
+        }
+        img {
+            max-width: 70%; /* Smaller GIF size */
+            height: auto;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .button {
+            background-color: #DD88CF;
+            color: black;
+            padding: 0.8rem 1.5rem; /* Normal button size */
+            font-size: 1rem; /* Normal text size */
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Smooth hover effect */
+            text-decoration: none; /* Remove underline */
+        }
+        .button:hover {
+            background-color: #cc77bb; /* Darker purple on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Pop-up Styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup button {
+            background-color: #DD88CF;
+            color: black;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Envelope Animation */
+        .envelope {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            background-color: #f4d03f;
+            margin: 2rem auto;
+            border-radius: 10px;
+            animation: openEnvelope 2s ease-in-out forwards;
+        }
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 60px solid #f4d03f;
+        }
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; /* Increased width */
+            max-width: 500px; /* Wider letter */
+            height: 300px; /* Fixed height for scrollable content */
+            background-color: white;
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: revealLetter 2s ease-in-out forwards;
+            opacity: 0;
+            overflow-y: auto; /* Make letter scrollable */
+        }
+        .letter h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .letter p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0.5rem 0;
+        }
+        .letter .close-button {
+            margin-top: 1rem;
+            background-color: #DD88CF;
+            color: black;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @keyframes openEnvelope {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes revealLetter {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem; /* Smaller heading for tablets */
+            }
+            p {
+                font-size: 0.9rem; /* Smaller paragraph for tablets */
+            }
+            img {
+                max-width: 80%; /* Slightly larger GIF for tablets */
+            }
+            .button {
+                padding: 0.6rem 1.2rem; /* Smaller button for tablets */
+                font-size: 0.9rem;
+            }
+            .letter {
+                width: 80%; /* Adjust width for tablets */
+                height: 250px; /* Adjust height for tablets */
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem; /* Smaller heading for mobile */
+            }
+            p {
+                font-size: 0.8rem; /* Smaller paragraph for mobile */
+            }
+            img {
+                max-width: 90%; /* Larger GIF for mobile */
+            }
+            .button {
+                padding: 0.5rem 1rem; /* Smaller button for mobile */
+                font-size: 0.8rem;
+            }
+            .letter {
+                width: 90%; /* Adjust width for mobile */
+                height: 200px; /* Adjust height for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pop-up Message -->
+    <div class="popup" id="popup">
+        <h2>Hey Pookie Gopi 🥰</h2>
+        <p>I just wanted to tell you how much you meant to me, so I have written this quote only for you. Don’t waste your time looking around here—turn around! 😘</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Envelope Animation and Love Letter -->
+    <div class="content" id="content" style="display: none;">
+        <div class="envelope">
+            <div class="letter">
+                <h2>My Love for You 💌</h2>
+                <p>
+                    My love for you isn’t something that can fade,<br>
+                    It’s a part of me, given only to you. 💖<br>
+                    No conditions, no expectations—<br>
+                    Just a promise: I will always stand by you. 🤝<br><br>
+                    If you need to stay up all night crying,<br>
+                    I will be right there, holding you close. 🤗<br>
+                    And if tomorrow feels like too much to bear,<br>
+                    I will be there, reminding you<br>
+                    you’re not alone. 🌟<br>
+                    Just say the word, and I will be there—next to you. 💕<br><br>
+                    Before you met me, I was getting by,<br>
+                    But something was missing, something not quite right. 🌈<br>
+                    Then you walked in, and suddenly, I was alive,<br>
+                    Every February, you’ll be my Valentine. 💘<br><br>
+                    So let’s go all the way, forgiving mistakes,<br>
+                    Forgetting the past, holding hands, hand in hand, 🤝<br>
+                    Loving each other till the stars burn out<br>
+                    and time comes to an end. 🌌<br>
+                    No regrets, only love,<br>
+                    Dancing forever, just you and me—<br>
+                    Bound together, endlessly. 💞<br><br>
+                    So with these notes, I confess to you that<br>
+                    With every heartbeat, with every breath, with every touch,<br>
+                    I find myself loving you more & more & more & moreeee. 💓<br>
+                    I love you diiiiii!!!!! 😍<br>
+                    ~Goro 💌
+                </p>
+                <button class="close-button" onclick="closeLetter()">Close Letter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Pop-up Message -->
+    <div class="popup" id="finalPopup" style="display: none;">
+        <h2>Just want to let you know that 💕</h2>
+        <p>
+            Every moment with you<br>
+            Is my new favourite<br>
+            Memories 🌟
+        </p>
+        <button onclick="redirectToPage14()">Close</button>
+    </div>
+
+    <script>
+        // Show pop-up on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('popup').style.display = 'block';
+        });
+
+        // Close pop-up and show envelope animation
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+
+        // Close letter and show final pop-up
+        function closeLetter() {
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('finalPopup').style.display = 'block';
+        }
+
+        // Redirect to page14.html
+        function redirectToPage14() {
+            window.location.href = 'page14.html'; // Redirect to page14.html
+        }
+    </script>
+</body>
+</html>
